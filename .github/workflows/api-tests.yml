@@ -1,0 +1,76 @@
+name: API tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature
+
+  workflow_dispatch:
+    inputs:
+      test_tag:
+        description: "Tags"
+        required: true
+        default: "api"
+        type: choice
+        options:
+          - api
+          - api-smoke
+          - api-regress
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Grant execute permission for Gradle Wrapper
+        run: chmod +x ./gradlew
+
+      - name: Run API tests
+        continue-on-error: true
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ github.event.inputs.test_tag }}" = "api-smoke" ]; then
+              ./gradlew clean apiSmokeTest
+            elif [ "${{ github.event.inputs.test_tag }}" = "api-regress" ]; then
+              ./gradlew clean apiRegressionTest
+            else
+              ./gradlew clean apiTest
+            fi
+          else
+            echo "Push detected → running default API tests"
+            ./gradlew clean apiTest
+          fi
+
+      - name: Install Allure CLI
+        if: always()
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          curl -Ls -o allure.zip https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.zip
+          unzip allure.zip
+          sudo mv allure-2.25.0 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+
+      - name: Generate Allure Report
+        if: always()
+        run: |
+          allure generate build/allure-results --clean -o build/allure-report
+
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: build/allure-report
