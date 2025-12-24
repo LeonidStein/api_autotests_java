@@ -29,29 +29,23 @@ public final class FakeDataManager extends FakeData {
                                 .collect(Collectors.joining());
     }
 
-    private static int getRandomIntFrom5To10() {
+    public static int getRandomIntFromTo(final int origin, final int bound) {
 
-        return ThreadLocalRandom.current().nextInt(5, 11);
-    }
-
-    private static int getRandomIntFrom1To255() {
-
-        return ThreadLocalRandom.current().nextInt(1, 256);
-    }
-
-    public static int getRandomIntegerFrom0ToMaxIntValue() {
-
-        return ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
+        return ThreadLocalRandom.current().nextInt(origin, bound);
     }
 
     public static String getLogin() {
 
-        return getRandomStringNumberFrom5To10() + new Faker().internet().emailAddress();
+        final int length = 10;
+
+        return getRandomString(length) + new Faker().internet().emailAddress();
     }
 
     public static String getPassword() {
 
-        return getRandomStringFrom5To10() + new Faker().internet().password();
+        final int length = 10;
+
+        return getRandomString(length) + new Faker().internet().password();
     }
 
     public static String getInvalidLongPassword() {
@@ -82,16 +76,6 @@ public final class FakeDataManager extends FakeData {
     public static boolean getRandomBoolean() {
 
         return ThreadLocalRandom.current().nextBoolean();
-    }
-
-    public static boolean getFalseBoolean() {
-
-        return false;
-    }
-
-    public static boolean getTrueBoolean() {
-
-        return true;
     }
 
     public static String getDescription() {
@@ -191,11 +175,6 @@ public final class FakeDataManager extends FakeData {
                                 .format(randomInstant);
     }
 
-    public static int getMaxIntegerValue() {
-
-        return Integer.MAX_VALUE;
-    }
-
     public static List<String> getTags() {
 
         return Arrays.asList(
@@ -214,44 +193,22 @@ public final class FakeDataManager extends FakeData {
         return new Faker().book().title();
     }
 
-    public static String getRandomLetterFrom1To255() {
-
-        int length = getRandomIntFrom1To255();
+    public static String getRandomLetter(final int length) {
 
         return randomStringBuilder(length, ALPHABET);
     }
 
-    public static String getRandomStringNumberFrom5To10() {
-
-        int length = getRandomIntFrom5To10();
+    public static String getRandomStringNumber(final int length) {
 
         return randomStringBuilder(length, NUMERIC_CHARS);
     }
 
-    public static String getRandomStringNumberFrom1To255() {
-
-        int length = getRandomIntFrom1To255();
-
-        return randomStringBuilder(length, NUMERIC_CHARS);
-    }
-
-    public static String getRandomSpecCharFrom1To255() {
-
-        int length = getRandomIntFrom1To255();
+    public static String getRandomSpecChar(final int length) {
 
         return randomStringBuilder(length, SPECIAL_CHARS);
     }
 
-    public static String getRandomStringFrom5To10() {
-
-        int length = getRandomIntFrom5To10();
-
-        return randomStringBuilder(length, RANDOM_STRING);
-    }
-
-    public static String getRandomStringFrom1To255() {
-
-        int length = getRandomIntFrom5To10();
+    public static String getRandomString(final int length) {
 
         return randomStringBuilder(length, RANDOM_STRING);
     }
