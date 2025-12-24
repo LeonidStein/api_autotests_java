@@ -14,7 +14,6 @@ import static com.github.leonidstein.data.FakeDataManager.getDescription;
 import static com.github.leonidstein.data.FakeDataManager.getDescriptionForUpdate;
 import static com.github.leonidstein.data.FakeDataManager.getDlcForUpdate;
 import static com.github.leonidstein.data.FakeDataManager.getDlcName;
-import static com.github.leonidstein.data.FakeDataManager.getFalseBoolean;
 import static com.github.leonidstein.data.FakeDataManager.getGenre;
 import static com.github.leonidstein.data.FakeDataManager.getHardDrive;
 import static com.github.leonidstein.data.FakeDataManager.getOSName;
@@ -22,11 +21,10 @@ import static com.github.leonidstein.data.FakeDataManager.getPrice;
 import static com.github.leonidstein.data.FakeDataManager.getPublishDate;
 import static com.github.leonidstein.data.FakeDataManager.getRamGB;
 import static com.github.leonidstein.data.FakeDataManager.getRandomBoolean;
-import static com.github.leonidstein.data.FakeDataManager.getRandomIntegerFrom0ToMaxIntValue;
+import static com.github.leonidstein.data.FakeDataManager.getRandomIntFromTo;
 import static com.github.leonidstein.data.FakeDataManager.getRating;
 import static com.github.leonidstein.data.FakeDataManager.getTags;
 import static com.github.leonidstein.data.FakeDataManager.getTitle;
-import static com.github.leonidstein.data.FakeDataManager.getTrueBoolean;
 import static com.github.leonidstein.data.FakeDataManager.getVideoCard;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -76,7 +74,7 @@ public final class GameBuilder {
                                 .company(getCompany())
                                 .description(getDescription())
                                 .dlcs(List.of(getPaidDlcsItem()))
-                                .gameId(getRandomIntegerFrom0ToMaxIntValue())
+                                .gameId(getRandomIntFromTo(1, Integer.MAX_VALUE))
                                 .genre(getGenre())
                                 .isFree(false)
                                 .price(getPrice())
@@ -139,7 +137,7 @@ public final class GameBuilder {
                                 .price(getPrice())
                                 .publishDate(getPublishDate())
                                 .rating(getRating())
-                                .requiredAge(getFalseBoolean())
+                                .requiredAge(false)
                                 .requirements(getRequirements())
                                 .tags(getTags())
                                 .title(getTitle())
@@ -175,7 +173,7 @@ public final class GameBuilder {
         return DlcsItemModel.builder()
                                 .description(getDescription())
                                 .dlcName(getDlcName())
-                                .isDlcFree(getFalseBoolean())
+                                .isDlcFree(false)
                                 .price(getPrice())
                                 .rating(getRating())
                                 .similarDlc(getSimilarDlc())
@@ -187,7 +185,7 @@ public final class GameBuilder {
         return DlcsItemModel.builder()
                                 .description(getDescription())
                                 .dlcName(getDlcName())
-                                .isDlcFree(getTrueBoolean())
+                                .isDlcFree(true)
                                 .price(getPrice())
                                 .rating(getRating())
                                 .similarDlc(getSimilarDlc())
