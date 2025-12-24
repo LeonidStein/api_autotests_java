@@ -7,8 +7,8 @@ public class FakeData {
     protected static final String SPECIAL_CHARS = "!@#$%^&*()?',.";
     protected static final String RANDOM_STRING = ALPHABET + NUMERIC_CHARS + SPECIAL_CHARS;
 
-    protected static final int INVALID_PASSWORD_LENGTH = 256;
-    protected static final int INVALID_LOGIN_LENGTH = 256;
+    public static final int INVALID_PASSWORD_LENGTH = 256;
+    public static final int INVALID_LOGIN_LENGTH = 256;
 
     public static final double MIN_PRICE = 1;
     public static final double MAX_PRICE = 1_000;
