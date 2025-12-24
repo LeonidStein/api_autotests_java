@@ -31,33 +31,25 @@ dependencies {
 
     agent("org.aspectj:aspectjweaver:${aspectJVersion}")
 
-    // JUnit5
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 
-    // Allure
     testImplementation(platform("io.qameta.allure:allure-bom:$allureVersion"))
     testImplementation("io.qameta.allure:allure-junit5")
     testImplementation("io.qameta.allure:allure-rest-assured")
 
-    // RestAssured
     testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
     testImplementation("commons-codec:commons-codec:$commonsCodecVersion")
 
-    // Owner
     testImplementation("org.aeonbits.owner:owner:$ownerVersion")
 
-    // Lombok
     testCompileOnly("org.projectlombok:lombok:$lombokVersion")
     testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
 
-    // Jackson
     testImplementation("com.fasterxml.jackson.core:jackson-databind:$jacksonDataBindVersion")
 
-    // AssertJ
     testImplementation("org.assertj:assertj-core:$assertJCoreVersion")
 
-    // Fake data
     testImplementation("com.github.javafaker:javafaker:$javaFakerVersion")
 }
 
