@@ -10,25 +10,24 @@ import static com.github.leonidstein.data.FakeDataManager.getDescriptionForUpdat
 import static com.github.leonidstein.data.FakeDataManager.getGenreForUpdate;
 import static com.github.leonidstein.data.FakeDataManager.getPriceForUpdate;
 import static com.github.leonidstein.data.FakeDataManager.getPublishDateForUpdate;
-import static com.github.leonidstein.data.FakeDataManager.getRandomIntegerFrom0ToMaxIntValue;
+import static com.github.leonidstein.data.FakeDataManager.getRandomIntFromTo;
 import static com.github.leonidstein.data.FakeDataManager.getRatingForUpdate;
 import static com.github.leonidstein.data.FakeDataManager.getTitleForUpdate;
-import static com.github.leonidstein.data.FakeDataManager.getTrueBoolean;
 import static com.github.leonidstein.utils.Helper.findByJsonProperty;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GameFieldBuilder {
 
-    public final static String COMPANY_FIELD = "company";
-    public final static String DESCRIPTION_FIELD = "description";
-    public final static String GENRE_FIELD = "genre";
-    public final static String TITLE_FIELD = "title";
-    public final static String GAME_PUBLISH_DATE = "publish_date";
-    public final static String GAME_ID_FIELD = "gameId";
-    public final static String GAME_PRICE = "price";
-    public final static String GAME_RATING = "rating";
-    public final static String GAME_IS_FREE = "isFree";
-    public final static String GAME_REQUIRED_AGE = "requiredAge";
+    private final static String COMPANY_FIELD = "company";
+    private final static String DESCRIPTION_FIELD = "description";
+    private final static String GENRE_FIELD = "genre";
+    private final static String TITLE_FIELD = "title";
+    private final static String GAME_PUBLISH_DATE = "publish_date";
+    private final static String GAME_ID_FIELD = "gameId";
+    private final static String GAME_PRICE = "price";
+    private final static String GAME_RATING = "rating";
+    private final static String GAME_IS_FREE = "isFree";
+    private final static String GAME_REQUIRED_AGE = "requiredAge";
 
     public static GameFieldsModel buildUpdateGameField(final String field, final Object value) {
 
@@ -60,7 +59,7 @@ public final class GameFieldBuilder {
 
     public static GameFieldsModel updateGameIdField() {
 
-        return buildUpdateGameField(findByJsonProperty(GAME_ID_FIELD, GamesItemModel.class), getRandomIntegerFrom0ToMaxIntValue());
+        return buildUpdateGameField(findByJsonProperty(GAME_ID_FIELD, GamesItemModel.class), getRandomIntFromTo(1, Integer.MAX_VALUE));
     }
 
     public static GameFieldsModel updateGamePriceField() {
@@ -75,12 +74,12 @@ public final class GameFieldBuilder {
 
     public static GameFieldsModel updateGameIsFreeField() {
 
-        return buildUpdateGameField(findByJsonProperty(GAME_IS_FREE, GamesItemModel.class), getTrueBoolean());
+        return buildUpdateGameField(findByJsonProperty(GAME_IS_FREE, GamesItemModel.class), true);
     }
 
     public static GameFieldsModel updateGameRequiredAgeField() {
 
-        return buildUpdateGameField(findByJsonProperty(GAME_REQUIRED_AGE, GamesItemModel.class), getTrueBoolean());
+        return buildUpdateGameField(findByJsonProperty(GAME_REQUIRED_AGE, GamesItemModel.class), true);
     }
 
     public static GameFieldsModel updateGamePublishDateField() {
