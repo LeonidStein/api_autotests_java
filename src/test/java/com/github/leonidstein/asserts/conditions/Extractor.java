@@ -19,14 +19,6 @@ public final class Extractor {
                        .getList(ROOT_PATH, clazz);
     }
 
-    public static <T> List<T> extractList(final ValidatableResponse response, final String path, final Class<T> clazz) {
-
-        return response.extract()
-                       .body()
-                       .jsonPath()
-                       .getList(path, clazz);
-    }
-
     public static <T> List<T> extractListOrSingle(final ValidatableResponse response, final Class<T> clazz) {
 
         try {
@@ -34,14 +26,6 @@ public final class Extractor {
         } catch (final Exception exception) {
             return List.of(extractObject(response, clazz));
         }
-    }
-
-    public static <T> T extractObject(final ValidatableResponse response, final String path, final Class<T> clazz) {
-
-        return response.extract()
-                       .body()
-                       .jsonPath()
-                       .getObject(path, clazz);
     }
 
     public static <T> T extractObject(final ValidatableResponse response, final Class<T> clazz) {
