@@ -37,7 +37,7 @@ import static com.github.leonidstein.asserts.conditions.ConditionManager.hasTitl
 import static com.github.leonidstein.asserts.conditions.ConditionManager.hasToken;
 import static com.github.leonidstein.constants.info.Message.GAME_WITH_THIS_ID_NOT_EXIST;
 import static com.github.leonidstein.constants.info.Status.FAIL;
-import static com.github.leonidstein.data.FakeDataManager.getRandomIntegerFrom0ToMaxIntValue;
+import static com.github.leonidstein.data.FakeDataManager.getRandomIntFromTo;
 import static com.github.leonidstein.resolvers.UserType.TEST_USER;
 import static com.github.leonidstein.resolvers.UserVariantType.WITH_GAME;
 import static com.github.leonidstein.utils.annotations.TestType.Type.NEGATIVE;
@@ -142,7 +142,7 @@ public final class InfoGameTest extends BaseTest {
     @Test
     public void testGetInfoGameByNonExistingId() {
 
-        int nonExistingGameId = getRandomIntegerFrom0ToMaxIntValue();
+        int nonExistingGameId = getRandomIntFromTo(1, Integer.MAX_VALUE);
 
         gameService
                 .makeRequest()

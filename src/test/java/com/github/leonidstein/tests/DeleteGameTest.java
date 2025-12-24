@@ -33,7 +33,7 @@ import static com.github.leonidstein.constants.info.Message.GAME_WITH_THIS_ID_NO
 import static com.github.leonidstein.constants.info.Message.LIST_WITH_DLC_TO_DELETE_CANT_BE_EMPTY_OR_NULL;
 import static com.github.leonidstein.constants.info.Status.FAIL;
 import static com.github.leonidstein.constants.info.Status.SUCCESS;
-import static com.github.leonidstein.data.FakeDataManager.getRandomIntegerFrom0ToMaxIntValue;
+import static com.github.leonidstein.data.FakeDataManager.getRandomIntFromTo;
 import static com.github.leonidstein.resolvers.UserType.NEW_USER;
 import static com.github.leonidstein.resolvers.UserVariantType.WITH_GAME;
 import static com.github.leonidstein.utils.annotations.TestType.Type.NEGATIVE;
@@ -133,7 +133,7 @@ public final class DeleteGameTest extends BaseTest {
     @Test
     public void testDeleteGameByNonExistingId() {
 
-        int nonExistingId = getRandomIntegerFrom0ToMaxIntValue();
+        int nonExistingId = getRandomIntFromTo(1, Integer.MAX_VALUE);
 
         gameService
                 .makeRequest()
@@ -243,7 +243,7 @@ public final class DeleteGameTest extends BaseTest {
     @Test
     public void testDeleteDlcByNonExistingId() {
 
-        int nonExistingId = getRandomIntegerFrom0ToMaxIntValue();
+        int nonExistingId = getRandomIntFromTo(1, Integer.MAX_VALUE);
 
         gameService
                 .makeRequest()

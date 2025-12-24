@@ -62,7 +62,7 @@ import static com.github.leonidstein.constants.info.Message.NEW_VALUE_EDITED_SUC
 import static com.github.leonidstein.constants.info.Message.NEW_VALUE_EDITED_SUCCESSFULLY_ON_FIELD_TITLE;
 import static com.github.leonidstein.constants.info.Status.FAIL;
 import static com.github.leonidstein.constants.info.Status.SUCCESS;
-import static com.github.leonidstein.data.FakeDataManager.getRandomIntegerFrom0ToMaxIntValue;
+import static com.github.leonidstein.data.FakeDataManager.getRandomIntFromTo;
 import static com.github.leonidstein.resolvers.UserType.NEW_USER;
 import static com.github.leonidstein.resolvers.UserVariantType.WITH_GAME_FOR_UPDATE;
 import static com.github.leonidstein.utils.annotations.TestType.Type.NEGATIVE;
@@ -157,7 +157,7 @@ public final class UpdateGameTest extends BaseTest {
     public void testUpdateDlcWithNonExistingId() {
 
         final List<DlcsItemModel> dlc = List.of(createdUpdatedDlc());
-        final int nonExistingGameId = getRandomIntegerFrom0ToMaxIntValue();
+        final int nonExistingGameId = getRandomIntFromTo(1, Integer.MAX_VALUE);
 
         gameService
                 .makeRequest()

@@ -36,16 +36,19 @@ import static com.github.leonidstein.constants.info.Message.MISSING_LOGIN_OR_PAS
 import static com.github.leonidstein.constants.info.Message.USER_CREATED;
 import static com.github.leonidstein.constants.info.Status.FAIL;
 import static com.github.leonidstein.constants.info.Status.SUCCESS;
+import static com.github.leonidstein.data.FakeData.INVALID_LOGIN_LENGTH;
+import static com.github.leonidstein.data.FakeData.INVALID_PASSWORD_LENGTH;
 import static com.github.leonidstein.data.FakeDataManager.getEmptyString;
 import static com.github.leonidstein.data.FakeDataManager.getInvalidLongLogin;
 import static com.github.leonidstein.data.FakeDataManager.getInvalidLongPassword;
 import static com.github.leonidstein.data.FakeDataManager.getLogin;
 import static com.github.leonidstein.data.FakeDataManager.getNullString;
 import static com.github.leonidstein.data.FakeDataManager.getPassword;
-import static com.github.leonidstein.data.FakeDataManager.getRandomLetterFrom1To255;
-import static com.github.leonidstein.data.FakeDataManager.getRandomSpecCharFrom1To255;
-import static com.github.leonidstein.data.FakeDataManager.getRandomStringFrom1To255;
-import static com.github.leonidstein.data.FakeDataManager.getRandomStringNumberFrom1To255;
+import static com.github.leonidstein.data.FakeDataManager.getRandomIntFromTo;
+import static com.github.leonidstein.data.FakeDataManager.getRandomLetter;
+import static com.github.leonidstein.data.FakeDataManager.getRandomSpecChar;
+import static com.github.leonidstein.data.FakeDataManager.getRandomString;
+import static com.github.leonidstein.data.FakeDataManager.getRandomStringNumber;
 import static com.github.leonidstein.data.FakeDataManager.getValidLongPasswordBoundaryValue;
 import static com.github.leonidstein.resolvers.UserType.NEW_USER;
 import static com.github.leonidstein.resolvers.UserVariantType.WITHOUT_GAME;
@@ -67,16 +70,16 @@ public final class RegistrationTest extends BaseTest {
     private static Stream<Arguments> validCredentialsUser() {
 
         return Stream.of(
-                Arguments.of(getLogin(), getRandomSpecCharFrom1To255()),
-                Arguments.of(getLogin(), getRandomStringFrom1To255()),
-                Arguments.of(getLogin(), getRandomStringNumberFrom1To255()),
-                Arguments.of(getLogin(), getRandomLetterFrom1To255()),
+                Arguments.of(getLogin(), getRandomSpecChar(getRandomIntFromTo(1, INVALID_PASSWORD_LENGTH))),
+                Arguments.of(getLogin(), getRandomString(getRandomIntFromTo(1, INVALID_PASSWORD_LENGTH))),
+                Arguments.of(getLogin(), getRandomStringNumber(getRandomIntFromTo(1, INVALID_PASSWORD_LENGTH))),
+                Arguments.of(getLogin(), getRandomLetter(getRandomIntFromTo(1, INVALID_PASSWORD_LENGTH))),
                 Arguments.of(getLogin(), getValidLongPasswordBoundaryValue()),
 
-                Arguments.of(getRandomSpecCharFrom1To255(), getPassword()),
-                Arguments.of(getRandomStringFrom1To255(), getPassword()),
-                Arguments.of(getRandomStringNumberFrom1To255(), getPassword()),
-                Arguments.of(getRandomLetterFrom1To255(), getPassword()),
+                Arguments.of(getRandomSpecChar(getRandomIntFromTo(1, INVALID_LOGIN_LENGTH)), getPassword()),
+                Arguments.of(getRandomString(getRandomIntFromTo(1, INVALID_LOGIN_LENGTH)), getPassword()),
+                Arguments.of(getRandomStringNumber(getRandomIntFromTo(1, INVALID_LOGIN_LENGTH)), getPassword()),
+                Arguments.of(getRandomLetter(getRandomIntFromTo(1, INVALID_LOGIN_LENGTH)), getPassword()),
                 Arguments.of(getValidLongPasswordBoundaryValue(), getPassword())
         );
     }
